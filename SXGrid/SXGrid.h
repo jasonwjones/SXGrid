@@ -10,11 +10,20 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "SXGridIndexPath.h"
 
 @interface SXGrid : NSObject
 
-@property (readonly) NSUInteger rows;
-@property (readonly) NSUInteger cols;
+- (NSUInteger)rows;
+- (NSUInteger)cols;
+- (id)objectAtRow:(NSUInteger)row col:(NSUInteger)col;
+
+@end
+
+@interface SXGrid (SXExtendedGrid)
+
++ (instancetype)gridWithRows:(NSUInteger)rows cols:(NSUInteger)cols;
++ (instancetype)gridWithRows:(NSUInteger)rows cols:(NSUInteger)cols fromBlock:(id (^)(NSUInteger row, NSUInteger col))callback;
 
 - (id)initWithRows:(NSUInteger)rows cols:(NSUInteger)cols;
 
@@ -25,5 +34,10 @@
 
 - (NSArray *)column:(NSUInteger)columnIndex;
 - (NSArray *)allColumns;
+
+- (NSString *)stringRepresentation;
+
+- (void)walkGridWithCallback:(void (^)(NSUInteger row, NSUInteger col, id value))callback;
+- (SXGrid *)gridByTransforming:(id (^)(id originalValue))transformer;
 
 @end

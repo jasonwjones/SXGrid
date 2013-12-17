@@ -155,6 +155,26 @@
     return stringRep;
 }
 
+#pragma mark - NSCoding
+
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+    [encoder encodeInteger:self.rows forKey:@"rows"];
+    [encoder encodeInteger:self.cols forKey:@"cols"];
+    [encoder encodeObject:self.data forKey:@"data"];
+}
+
+- (id)initWithCoder:(NSCoder *)decoder
+{
+    self = [super init];
+    if (self) {
+        self.rows = [decoder decodeIntegerForKey:@"rows"];
+        self.cols = [decoder decodeIntegerForKey:@"cols"];
+        self.data = [decoder decodeObjectForKey:@"data"];
+    }
+    return self;
+}
+
 #pragma mark - Housekeeping
 
 - (NSString *)description

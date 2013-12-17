@@ -12,7 +12,9 @@
 #import <Foundation/Foundation.h>
 #import "SXGridIndexPath.h"
 
-@interface SXGrid : NSObject
+// BIG API CHANGE
+
+@interface SXGrid : NSObject <NSCoding>
 
 - (NSUInteger)rows;
 - (NSUInteger)cols;
